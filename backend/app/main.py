@@ -29,6 +29,12 @@ app.add_middleware(
 )
 
 
+@app.options("/{path:path}")
+def preflight(path: str):
+    """Preflight CORS handler - no validation needed."""
+    return {}
+
+
 @app.get("/")
 def root() -> dict:
     return {"message": settings.app_name, "env": settings.app_env}

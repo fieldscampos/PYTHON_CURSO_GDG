@@ -33,7 +33,7 @@ def google_login(payload: LoginRequest) -> AuthResponse:
         email = str(payload.email).strip().lower() if payload.email else ""
         full_name = payload.full_name
 
-    allowed_suffixes = tuple(f"@{domain}" for domain in settings.allowed_email_domains)
+    allowed_suffixes = tuple(f"@{domain}" for domain in settings.email_domains_list)
     if not email.endswith(allowed_suffixes):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,

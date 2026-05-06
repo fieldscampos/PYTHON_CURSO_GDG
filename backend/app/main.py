@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 from supabase import create_client
 
 from app.auth.routes import router as auth_router
@@ -19,7 +20,25 @@ app = FastAPI(
     docs_url="/api/docs" if settings.app_env == "dev" else None,
 )
 
-# CORS middleware - must be first
+
+@app.middleware("http")
+async def cors_middleware(request: Request, call_next):
+    """Handle CORS preflight requests before validation."""
+    if request.method == "OPTIONS":
+        return Response(
+            status_code=200,
+            headers={
+                "Access-Control-Allow-Origin": request.headers.get("origin", "*"),
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization",
+                "Access-Control-Max-Age": "3600",
+            },
+        )
+    response = await call_next(request)
+    return response
+
+
+# CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
@@ -27,12 +46,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.options("/{path:path}")
-def preflight(path: str):
-    """Preflight CORS handler - no validation needed."""
-    return {}
 
 
 @app.get("/")

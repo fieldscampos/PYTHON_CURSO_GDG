@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: curso-python-gdg-api
+    env: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: APP_ENV
+        value: prod
+      - key: BACKEND_CORS_ORIGINS
+        value: https://curso-python-gdg.vercel.app
+      # Secrets (define en Render dashboard):
+      # - SUPABASE_URL
+      # - SUPABASE_KEY
+      # - JWT_SECRET (optional si implementas auth)
+
+webhooks:
+  - type: github
+    events: push

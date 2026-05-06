@@ -7,6 +7,7 @@ from typing import Dict, List, Optional, Union
 from uuid import uuid4
 
 from supabase import Client, create_client
+from supabase.lib.client_options import ClientOptions
 
 from app.config import get_settings
 
@@ -208,7 +209,8 @@ def get_repository() -> RepositoryType:
 
     settings = get_settings()
     if settings.supabase_url and settings.supabase_key:
-        client = create_client(settings.supabase_url, settings.supabase_key)
+        options = ClientOptions(persist_session=False)
+        client = create_client(settings.supabase_url, settings.supabase_key, options=options)
         _repo_singleton = SupabaseRepository(client)
     else:
         _repo_singleton = InMemoryRepository()

@@ -14,13 +14,22 @@ cors_origins = settings.cors_origins_list if settings.cors_origins_list else ["*
 
 app = FastAPI(title=settings.app_name, version="0.1.0")
 
+# CORS middleware with explicit preflight handling
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600,
 )
+
+
+@app.options("/{full_path:path}")
+async def preflight_handler(full_path: str):
+    """Handle CORS preflight requests."""
+    return {"status": "ok"}
 
 
 @app.get("/")

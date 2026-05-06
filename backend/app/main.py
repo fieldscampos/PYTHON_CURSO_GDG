@@ -20,7 +20,16 @@ app = FastAPI(
     docs_url="/api/docs" if settings.app_env == "dev" else None,
 )
 
+# Agregar CORS middleware PRIMERO (será ejecutado SEGUNDO)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=cors_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
+# Agregar middleware HTTP personalizado SEGUNDO (será ejecutado PRIMERO)
 @app.middleware("http")
 async def cors_middleware(request: Request, call_next):
     """Handle CORS preflight requests before validation."""
@@ -42,16 +51,6 @@ async def cors_middleware(request: Request, call_next):
 async def preflight(full_path: str):
     """Universal preflight endpoint."""
     return {}
-
-
-# CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=cors_origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 @app.get("/")

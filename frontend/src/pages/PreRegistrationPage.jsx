@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import api from '../services/api';
 import GDGLogo from '../logos/GDG Guadalajara (1).png';
 import CUGDLLogo from '../logos/Logos CUGDL-06.png';
 
@@ -146,53 +147,29 @@ export default function PreRegistrationPage() {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/registrations/pre-registro', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          full_name: formData.fullName,
-          student_code: formData.studentCode,
-          institutional_email: formData.institutionalEmail,
-          personal_email: formData.personalEmail || null,
-          phone_whatsapp: formData.phoneWhatsapp || null,
-          career: formData.career,
-          semester: formData.semester,
-          programming_level: formData.programmingLevel,
-          python_experience: formData.pythonExperience,
-          operating_system: formData.operatingSystem,
-          has_laptop: formData.hasLaptop,
-          preferred_days: formData.preferredDays,
-          preferred_schedule: formData.preferredSchedule,
-          motivation: formData.motivation,
-          attendance_commitment: formData.attendanceCommitment,
-          payment_option: formData.paymentOption,
-          scholarship_reason: formData.paymentOption === 'scholarship' ? formData.scholarshipReason : null
-        })
+      await api.post('/registrations/pre-registro', {
+        full_name: formData.fullName,
+        student_code: formData.studentCode,
+        institutional_email: formData.institutionalEmail,
+        personal_email: formData.personalEmail || null,
+        phone_whatsapp: formData.phoneWhatsapp || null,
+        career: formData.career,
+        semester: formData.semester,
+        programming_level: formData.programmingLevel,
+        python_experience: formData.pythonExperience,
+        operating_system: formData.operatingSystem,
+        has_laptop: formData.hasLaptop,
+        preferred_days: formData.preferredDays,
+        preferred_schedule: formData.preferredSchedule,
+        motivation: formData.motivation,
+        attendance_commitment: formData.attendanceCommitment,
+        payment_option: formData.paymentOption,
+        scholarship_reason: formData.paymentOption === 'scholarship' ? formData.scholarshipReason : null
       });
-
-      if (!response.ok) {
-        let errorMessage = 'Error al guardar el pre-registro';
-        try {
-          const errorData = await response.json();
-          errorMessage = errorData.detail || errorData.message || errorMessage;
-        } catch (parseError) {
-          // Si no se puede parsear JSON, usar el status
-          errorMessage = `Error ${response.status}: ${response.statusText}`;
-        }
-        throw new Error(errorMessage);
-      }
-
-      // Verificar que tenemos JSON válido
-      const responseData = await response.json();
-      if (!responseData.id) {
-        throw new Error('Respuesta inválida del servidor');
-      }
 
       setSubmitted(true);
     } catch (err) {
-      setError(err.message || 'Error al enviar el formulario. Intenta de nuevo.');
+      setError(err.response?.data?.detail || err.message || 'Error al enviar el formulario. Intenta de nuevo.');
       console.error('Form submission error:', err);
     } finally {
       setLoading(false);

@@ -10,26 +10,23 @@ from app.registrations.routes import router as registrations_router
 
 settings = get_settings()
 
+# Ensure we have valid CORS origins
 cors_origins = settings.cors_origins_list if settings.cors_origins_list else ["*"]
 
-app = FastAPI(title=settings.app_name, version="0.1.0")
+app = FastAPI(
+    title=settings.app_name,
+    version="0.1.0",
+    docs_url="/api/docs" if settings.app_env == "dev" else None,
+)
 
-# CORS middleware with explicit preflight handling
+# CORS middleware - must be first
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["*"],
-    max_age=3600,
 )
-
-
-@app.options("/{full_path:path}")
-async def preflight_handler(full_path: str):
-    """Handle CORS preflight requests."""
-    return {"status": "ok"}
 
 
 @app.get("/")

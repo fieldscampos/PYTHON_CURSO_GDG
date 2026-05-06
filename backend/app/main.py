@@ -10,11 +10,13 @@ from app.registrations.routes import router as registrations_router
 
 settings = get_settings()
 
+cors_origins = settings.cors_origins_list if settings.cors_origins_list else ["*"]
+
 app = FastAPI(title=settings.app_name, version="0.1.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins_list,
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

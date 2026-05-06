@@ -38,6 +38,12 @@ async def cors_middleware(request: Request, call_next):
     return response
 
 
+@app.options("/{full_path:path}", include_in_schema=False)
+async def preflight(full_path: str):
+    """Universal preflight endpoint."""
+    return {}
+
+
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,

@@ -16,6 +16,8 @@ const SEMESTERS = ['1ro', '2do', '3ro', '4to'];
 
 const PROGRAMMING_LEVELS = ['Nulo', 'Básico', 'Intermedio', 'Avanzado'];
 
+const SHIRT_SIZES = ['S', 'M', 'L', 'XL', 'XXL'];
+
 export default function PreRegistrationPage() {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -32,6 +34,7 @@ export default function PreRegistrationPage() {
     preferredDays: '', // 'weekdays', 'weekend', o 'both'
     preferredSchedule: '', // 'afternoon', 'evening', o 'both'
     motivation: '',
+    shirtSize: '',
     attendanceCommitment: false,
     paymentOption: '', // 'payment' o 'scholarship'
     scholarshipReason: ''
@@ -118,6 +121,11 @@ export default function PreRegistrationPage() {
       return false;
     }
 
+    if (!formData.shirtSize) {
+      setError('La talla de playera es requerida');
+      return false;
+    }
+
     if (!formData.attendanceCommitment) {
       setError('Debes aceptar el compromiso de asistencia');
       return false;
@@ -162,6 +170,7 @@ export default function PreRegistrationPage() {
         preferred_days: formData.preferredDays,
         preferred_schedule: formData.preferredSchedule,
         motivation: formData.motivation,
+        shirt_size: formData.shirtSize,
         attendance_commitment: formData.attendanceCommitment,
         payment_option: formData.paymentOption,
         scholarship_reason: formData.paymentOption === 'scholarship' ? formData.scholarshipReason : null
@@ -488,6 +497,23 @@ export default function PreRegistrationPage() {
                 placeholder="Cuéntanos sobre tu interés..."
                 required
               />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="shirtSize">Talla de playera (Corte Unisex/Mens) *</label>
+              <select
+                id="shirtSize"
+                name="shirtSize"
+                value={formData.shirtSize}
+                onChange={handleChange}
+                required
+              >
+                <option value="">-- Selecciona --</option>
+                {SHIRT_SIZES.map(size => (
+                  <option key={size} value={size}>{size}</option>
+                ))}
+              </select>
+              <small>Esta información es únicamente para fines logísticos de los kits conmemorativos.</small>
             </div>
 
             <div className="form-group">

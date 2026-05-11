@@ -18,6 +18,7 @@ class PreRegistrationIn(BaseModel):
     preferred_days: str = Field(..., pattern="^(weekdays|weekend|both)$")
     preferred_schedule: str = Field(..., pattern="^(afternoon|evening|both)$")
     motivation: str = Field(..., min_length=1)
+    shirt_size: str = Field(..., pattern="^(S|M|L|XL|XXL)$")
     attendance_commitment: bool = True
     payment_option: str = Field(..., pattern="^(payment|scholarship)$")
     scholarship_reason: Optional[str] = None

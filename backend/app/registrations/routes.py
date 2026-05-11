@@ -58,7 +58,10 @@ def create_pre_registro(data: PreRegistrationIn) -> PreRegistrationOut:
             "python_experience": data.python_experience,
             "operating_system": data.operating_system,
             "has_laptop": data.has_laptop,
+            "preferred_days": data.preferred_days,
+            "preferred_schedule": data.preferred_schedule,
             "motivation": data.motivation,
+            "shirt_size": data.shirt_size,
             "attendance_commitment": data.attendance_commitment,
             "payment_option": data.payment_option,
             "scholarship_reason": data.scholarship_reason if data.payment_option == "scholarship" else None

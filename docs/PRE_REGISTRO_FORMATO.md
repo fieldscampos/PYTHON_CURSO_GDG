@@ -125,6 +125,25 @@ Opciones:
 Tipo: Texto largo (Párrafo).
 
 
+13. Talla de playera (Corte Unise/Mens)
+
+Tipo: Opción múltiple / Lista desplegable.
+
+Opciones:
+
+Small (S)
+
+Medium (M)
+
+Large (L)
+
+Extra Large (XL)
+
+Double Extra Large (XXL)
+
+Nota: "Esta información es únicamente para fines logísticos de los kits conmemorativos. Por favor, selecciona la talla que usas habitualmente."
+
+
 13. Compromiso de asistencia
 
 Tipo: Casillas de verificación (Obligatorio).
@@ -134,16 +153,24 @@ Texto: [ ] Me comprometo a asistir a las sesiones programadas y cumplir con el c
 Sección 5: Cuota de Recuperación y Becas
 Agrega esta sección al final del formulario para tocar el tema del pago de manera clara y darles la opción de la beca de inmediato.
 
-14. Respecto a la cuota de recuperación de $100 pesos para los talleristas, selecciona la situación que aplique para ti:
+Texto de introducción (Contexto profesional):
 
-Tipo: Opción múltiple (Obligatoria).
+Este taller es posible gracias a la colaboración voluntaria de profesionales del GDG Guadalajara. La cuota de recuperación de $100 MXN se destina íntegramente a cubrir los honorarios y viáticos de los talleristas, reconociendo su tiempo y expertise.
 
-Opciones:
+En apoyo a nuestra comunidad estudiantil, el CUGDL ofrecerá un número limitado de becas del 100%. Estas becas están reservadas exclusivamente para estudiantes que, por su situación económica actual, les resulte imposible cubrir la cuota y que demuestren un alto compromiso con el aprovechamiento del curso.
 
-[ ] Estoy de acuerdo y puedo cubrir la cuota de recuperación de $100 pesos.
+16. Situación para la inscripción (Selecciona una):
 
-[ ] Estoy muy interesado(a) en el curso, pero solicito una beca del 100% para exentar el pago.
+[ ] Deseo realizar el pago de la cuota de recuperación ($100 MXN). (Contribuyo al pago de los talleristas, mi merch del curso y aseguro mi lugar tras el pre-registro).
 
-15. Si solicitaste la beca del 100%, cuéntanos brevemente por qué te gustaría ser considerado(a) para este apoyo:
+[ ] Solicito ser candidato(a) a una beca del 100%. (Entiendo que las becas son limitadas y que mi solicitud pasará por un proceso de revisión y selección basado en mi exposición de motivos. Este no asgeura mi lugar en el curso).
 
-Tipo: Texto largo / Párrafo (Opcional).
+17. Exposición de motivos para solicitud de beca (Solo si seleccionaste "Beca"):
+
+Tipo: Texto largo (Párrafo).
+
+Descripción: Si solicitaste la beca, explica brevemente tu situación actual y por qué este apoyo es fundamental para que puedas cursar el taller. Las becas se asignarán priorizando el compromiso académico y la necesidad económica demostrada.
+
+Nota: La información proporcionada en esta sección será tratada con estricta confidencialidad y solo se utilizará para el proceso de selección de becas.
+Nota: El pre-registro no garantiza un lugar definitivo en el curso. La confirmación final se realizará posteriormente, una vez que se hayan revisado las solicitudes y se hayan asignado las becas correspondientes. Agradecemos tu comprensión y paciencia durante este proceso.
+Nota: El comité organizador contactará a los seleccionados para la beca vía correo electrónico institucional para validar su situación y compromiso, y para proporcionar detalles sobre el proceso de pago o asignación de becas. Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en contactarnos.

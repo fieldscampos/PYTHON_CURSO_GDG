@@ -52,12 +52,7 @@ export default function PreRegistrationPage() {
     }));
   };
 
-  const handlePaymentOptionChange = (option) => {
-    setFormData(prev => ({
-      ...prev,
-      paymentOption: prev.paymentOption === option ? '' : option
-    }));
-  };
+
 
   const validateForm = () => {
     // Validaciones requeridas
@@ -533,44 +528,66 @@ export default function PreRegistrationPage() {
           {/* Sección 5: Cuota de Recuperación y Becas */}
           <section className="form-section">
             <h2>Cuota de Recuperación y Becas</h2>
-            <p className="section-description">El curso tiene un costo de recuperación de $100 MXN. Contamos con becas del 100% para quienes lo necesiten.</p>
+            
+            <div className="section-intro">
+              <p className="intro-paragraph">
+                Este taller es posible gracias a la colaboración voluntaria de profesionales del GDG Guadalajara. La cuota de recuperación de <strong>$100 MXN</strong> se destina íntegramente a cubrir los honorarios y viáticos de los talleristas, reconociendo su tiempo y expertise.
+              </p>
+              <p className="intro-paragraph">
+                En apoyo a nuestra comunidad estudiantil, el CUGDL ofrecerá un número limitado de becas del 100%. Estas becas están reservadas exclusivamente para estudiantes que, por su situación económica actual, les resulte imposible cubrir la cuota y que demuestren un alto compromiso con el aprovechamiento del curso.
+              </p>
+            </div>
 
             <div className="form-group">
-              <label>Respecto a la cuota de recuperación de $100 MXN, selecciona la situación que aplique para ti: *</label>
+              <label>Situación para la inscripción (Selecciona una) *</label>
               <div className="checkbox-group">
                 <label>
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name="paymentOption"
                     checked={formData.paymentOption === 'payment'}
-                    onChange={() => handlePaymentOptionChange('payment')}
+                    onChange={() => setFormData(prev => ({ ...prev, paymentOption: 'payment' }))}
                   />
-                  Estoy de acuerdo y puedo cubrir la cuota de recuperación de $100 MXN
+                  <span className="option-title">Deseo realizar el pago de la cuota de recuperación</span>
+                  <span className="option-description">($100 MXN) Contribuyo al pago de los talleristas, mi merch del curso y aseguro mi lugar tras el pre-registro.</span>
                 </label>
                 <label>
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name="paymentOption"
                     checked={formData.paymentOption === 'scholarship'}
-                    onChange={() => handlePaymentOptionChange('scholarship')}
+                    onChange={() => setFormData(prev => ({ ...prev, paymentOption: 'scholarship' }))}
                   />
-                  Estoy muy interesado(a) en el curso, pero solicito una beca del 100% para exentar el pago
+                  <span className="option-title">Solicito ser candidato(a) a una beca del 100%</span>
+                  <span className="option-description">Entiendo que las becas son limitadas y que mi solicitud pasará por un proceso de revisión y selección basado en mi exposición de motivos. Esto no asegura mi lugar en el curso.</span>
                 </label>
               </div>
             </div>
 
             {formData.paymentOption === 'scholarship' && (
               <div className="form-group">
-                <label htmlFor="scholarshipReason">Si solicitaste la beca del 100%, cuéntanos brevemente por qué te gustaría ser considerado(a) para este apoyo: *</label>
+                <label htmlFor="scholarshipReason">Exposición de motivos para solicitud de beca *</label>
                 <textarea
                   id="scholarshipReason"
                   name="scholarshipReason"
                   value={formData.scholarshipReason}
                   onChange={handleChange}
-                  rows={4}
-                  placeholder="Cuéntanos tu situación..."
+                  rows={5}
+                  placeholder="Explica brevemente tu situación actual y por qué este apoyo es fundamental para que puedas cursar el taller. Las becas se asignarán priorizando el compromiso académico y la necesidad económica demostrada."
                   required={formData.paymentOption === 'scholarship'}
                 />
+                <small>La información proporcionada en esta sección será tratada con estricta confidencialidad y solo se utilizará para el proceso de selección de becas.</small>
               </div>
             )}
+
+            <div className="form-notices">
+              <p className="notice">
+                <strong>Importante:</strong> El pre-registro no garantiza un lugar definitivo en el curso. La confirmación final se realizará posteriormente, una vez que se hayan revisado las solicitudes y se hayan asignado las becas correspondientes. Agradecemos tu comprensión y paciencia durante este proceso.
+              </p>
+              <p className="notice">
+                El comité organizador contactará a los seleccionados para la beca vía correo electrónico institucional para validar su situación y compromiso, y para proporcionar detalles sobre el proceso de pago o asignación de becas. Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en contactarnos.
+              </p>
+            </div>
           </section>
 
           <div className="form-actions">

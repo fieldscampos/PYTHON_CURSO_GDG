@@ -727,6 +727,7 @@
 .preregistration-header {
   text-align: center;
   margin-bottom: 50px;
+  padding: 0 16px;
 }
 
 .preregistration-header h1 {
@@ -740,6 +741,7 @@
   color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
+  line-height: 1.6;
 }
 
 .logos-row {
@@ -748,11 +750,60 @@
   align-items: center;
   gap: 24px;
   margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.logos-row .separator {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  transition: font-size var(--transition-fast);
 }
 
 .preregistration-header .logo {
   height: 80px;
   width: auto;
+  max-width: 150px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .logos-row {
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .logos-row .separator {
+    font-size: 1.5rem;
+  }
+  
+  .preregistration-header .logo {
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logos-row {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .logos-row .separator {
+    font-size: 1.2rem;
+  }
+  
+  .preregistration-header .logo {
+    height: 48px;
+  }
+  
+  .preregistration-header h1 {
+    font-size: 1.5rem;
+    margin: 16px 0 12px 0;
+  }
+  
+  .preregistration-header p {
+    font-size: 0.95rem;
+  }
 }
 
 .preregistration-form {
@@ -909,6 +960,22 @@
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  padding: 0 16px;
+}
+
+@media (max-width: 480px) {
+  .narrow {
+    padding: 0 12px;
+  }
+  
+  .preregistration-form {
+    max-width: 100%;
+  }
+  
+  .form-section {
+    padding: 20px;
+    margin-bottom: 16px;
+  }
 }
 
 /* Landing page container */
